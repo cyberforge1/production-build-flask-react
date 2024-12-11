@@ -1,1 +1,1 @@
-# AWS Elastic Beanstalk Flask React
+# AWS Elastic Beanstalk - Flask - React
