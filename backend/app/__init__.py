@@ -1,4 +1,4 @@
-# app/__init__.py
+# backend/app/__init__.py
 
 from flask import Flask
 from flask_cors import CORS
@@ -15,7 +15,7 @@ def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
 
-    # Validate configuration
+    # Validate configuration if available
     if hasattr(config_class, "validate"):
         config_class.validate()
 

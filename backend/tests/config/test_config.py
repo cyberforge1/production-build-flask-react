@@ -1,4 +1,4 @@
-# tests/config/test_config.py
+# backend/tests/config/test_config.py
 
 import pytest
 from app.config import Config
