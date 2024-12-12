@@ -4,8 +4,11 @@ import os
 from dotenv import load_dotenv
 
 class Config:
-    # Load environment variables from .env file if it exists
-    load_dotenv()
+    """Base configuration."""
+    # Load environment variables from .env file if it exists and not in production
+    if os.getenv('FLASK_ENV', 'development').lower() != 'production':
+        dotenv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '.env')
+        load_dotenv(dotenv_path=dotenv_path)
 
     SECRET_KEY = os.getenv('SECRET_KEY', 'default-secret-key')
     DEBUG = os.getenv('DEBUG', 'True') == 'True'
@@ -14,6 +17,7 @@ class Config:
 
     @classmethod
     def validate(cls):
+        """Validate that necessary configurations are set."""
         print("DEBUG (Config): SQLALCHEMY_DATABASE_URI loaded:", cls.SQLALCHEMY_DATABASE_URI)
         if not cls.SQLALCHEMY_DATABASE_URI:
             raise ValueError(
@@ -42,5 +46,6 @@ class ProductionConfig(Config):
 
     @classmethod
     def validate(cls):
+        """Validate production-specific configurations."""
         super().validate()
-        # Additional production-specific validations can be added here
+        # Add any production-specific validations here if necessary

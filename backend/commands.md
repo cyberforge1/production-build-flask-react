@@ -31,6 +31,17 @@ python scripts/db_data_collection_and_export.py
 python scripts/manual_endpoint_test.py
 
 
+
+# Stop any running Nginx instance
+sudo nginx -s stop
+
+# Start Nginx with the new configuration
+sudo nginx
+
+
+
+
+
 # Testing
 
 pytest

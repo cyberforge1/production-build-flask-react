@@ -3,9 +3,10 @@
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env file located in the backend directory
-dotenv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env')
-load_dotenv(dotenv_path=dotenv_path)
+# Conditionally load environment variables from .env file
+if os.getenv('FLASK_ENV', 'development').lower() != 'production':
+    dotenv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env')
+    load_dotenv(dotenv_path=dotenv_path)
 
 from app import create_app
 
