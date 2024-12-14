@@ -19,7 +19,7 @@ production-build-flask-react/
 │   ├── package.json
 │   ├── src/
 │   ├── public/
-│   └── dist/  # Generated after `npm run build`
+│   └── dist/
 ├── prepare_production.sh
 ├── .platform/
 │   └── nginx/
