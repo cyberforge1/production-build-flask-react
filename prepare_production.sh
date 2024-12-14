@@ -4,27 +4,30 @@
 # Exit immediately if a command exits with a non-zero status.
 set -e
 
-# 1. Build the React frontend (located in frontend/)
+# 1. Define directories to clean up and store production-ready files
+OUTPUT_DIR="production_build"
+STATIC_DIR="backend/static"
+
+# 2. Cleanup previous build artifacts
+echo "Cleaning up previous builds..."
+rm -rf "$OUTPUT_DIR" "$STATIC_DIR"
+
+# 3. Build the React frontend (located in frontend/)
 echo "Building the React frontend..."
 cd frontend
 npm install
 npm run build
 cd ..
 
-# 2. Define the directory to store production-ready files
-OUTPUT_DIR="production_build"
-
-# 3. Remove any previous build artifacts
-echo "Cleaning up previous production build..."
-rm -rf "$OUTPUT_DIR"
-
 # 4. Create the output directory structure
 echo "Creating production build directory..."
-mkdir -p "$OUTPUT_DIR/backend/app/static"  # Ensure static directory exists
+mkdir -p "$OUTPUT_DIR/backend/app/static"  # Ensure app's static directory exists
+mkdir -p "$STATIC_DIR"  # Ensure backend/static directory exists
 
-# 5. Copy the React build output into the Flask app's static directory
-echo "Copying React build to production_build/backend/app/static..."
+# 5. Copy the React build output into both the Flask app's static directory and backend/static
+echo "Copying React build to production_build/backend/app/static and backend/static..."
 cp -r frontend/dist/* "$OUTPUT_DIR/backend/app/static"
+cp -r frontend/dist/* "$STATIC_DIR"
 
 # 6. Copy the Flask application and related files from backend/
 echo "Copying Flask backend..."
