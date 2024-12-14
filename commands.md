@@ -11,13 +11,14 @@ chmod +x prepare_production.sh
 
 gunicorn --chdir backend --bind 0.0.0.0:5001 wsgi:app
 
-
-
 ## Running React App
 
 serve -s production_build/frontend_build -l 3000
 
 
+# Venv
+
+source backend/venv/bin/activate
 
 
 ## Testing API Endpoints
@@ -32,11 +33,12 @@ curl http://localhost:5001/api/todos/
 
 # Deploy Production Build Locally
 
-cd production_build
-
-source backend/venv/bin/activate
+cd production_build && source backend/venv/bin/activate
 
 PYTHONPATH=backend gunicorn backend.wsgi:app --bind 0.0.0.0:5001 --workers 4
+
+lsof -i :5001
+
 
 # Production Endpoints
 
@@ -46,7 +48,4 @@ curl http://127.0.0.1:5001/api/todos/
 curl -X POST -H "Content-Type: application/json" -d '{"title": "New Todo"}' http://127.0.0.1:5001/api/todos/
 
 
-# Venv
-
-source backend/venv/bin/activate
 
