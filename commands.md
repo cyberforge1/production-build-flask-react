@@ -27,3 +27,18 @@ curl http://localhost:5001/api/
 curl http://localhost:5001/api/helloworld/
 
 curl http://localhost:5001/api/todos/
+
+
+
+# Deploy Production Build Locally
+
+cd production_build/backend
+
+python3 -m venv venv
+source venv/bin/activate
+
+pip install -r requirements.txt
+
+flask db upgrade
+
+gunicorn wsgi:app --bind 0.0.0.0:5001 --workers 4
