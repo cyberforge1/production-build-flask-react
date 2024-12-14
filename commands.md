@@ -1,10 +1,8 @@
 # Commands
 
-## Production Build Scripts
+# Venv
 
-chmod +x prepare_production.sh
-
-./prepare_production.sh
+source backend/venv/bin/activate
 
 
 ## Running Gunicorn (Flask API)
@@ -16,11 +14,6 @@ gunicorn --chdir backend --bind 0.0.0.0:5001 wsgi:app
 serve -s production_build/frontend_build -l 3000
 
 
-# Venv
-
-source backend/venv/bin/activate
-
-
 ## Testing API Endpoints
 
 curl http://localhost:5001/api/
@@ -29,6 +22,12 @@ curl http://localhost:5001/api/helloworld/
 
 curl http://localhost:5001/api/todos/
 
+
+## Production Build Scripts
+
+chmod +x prepare_production.sh
+
+./prepare_production.sh
 
 
 # Deploy Production Build Locally
