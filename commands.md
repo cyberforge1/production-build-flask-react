@@ -36,7 +36,14 @@ cd production_build
 
 source backend/venv/bin/activate
 
-gunicorn wsgi:app --bind 0.0.0.0:5001 --workers 4
+PYTHONPATH=backend gunicorn backend.wsgi:app --bind 0.0.0.0:5001 --workers 4
+
+# Production Endpoints
+
+curl http://127.0.0.1:5001/api/
+curl http://127.0.0.1:5001/api/helloworld/
+curl http://127.0.0.1:5001/api/todos/
+curl -X POST -H "Content-Type: application/json" -d '{"title": "New Todo"}' http://127.0.0.1:5001/api/todos/
 
 
 # Venv
