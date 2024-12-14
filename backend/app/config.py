@@ -12,10 +12,14 @@ class Config:
     def validate(cls):
         print("DEBUG (Config): SQLALCHEMY_DATABASE_URI loaded:", cls.SQLALCHEMY_DATABASE_URI)
         if not cls.SQLALCHEMY_DATABASE_URI:
+            print("DEBUG: Environment Variables Dump:")
+            for key, value in os.environ.items():
+                print(f"{key} = {value}")
             raise ValueError(
                 "SQLALCHEMY_DATABASE_URI is not set. Ensure it's defined in the .env file "
                 "or as an environment variable. Check the .env file's location and syntax."
             )
+
 
 class TestingConfig(Config):
     """Configuration for testing."""

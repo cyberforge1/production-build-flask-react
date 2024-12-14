@@ -9,7 +9,7 @@ chmod +x prepare_production.sh
 
 ## Running Gunicorn (Flask API)
 
-gunicorn --chdir backend --bind 0.0.0.0:5001 wsgi:application
+gunicorn --chdir backend --bind 0.0.0.0:5001 wsgi:app
 
 
 
@@ -32,13 +32,14 @@ curl http://localhost:5001/api/todos/
 
 # Deploy Production Build Locally
 
-cd production_build/backend
+cd production_build
 
-python3 -m venv venv
-source venv/bin/activate
-
-pip install -r requirements.txt
-
-flask db upgrade
+source backend/venv/bin/activate
 
 gunicorn wsgi:app --bind 0.0.0.0:5001 --workers 4
+
+
+# Venv
+
+source backend/venv/bin/activate
+
